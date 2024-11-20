@@ -24,7 +24,9 @@ namespace Goal_Flex_ServerSide.Repositories
         }
         public async Task<Exercise> CreateExerciseAsync(Exercise exercise)
         {
-            throw new NotImplementedException();
+            await dbContext.Exercises.AddAsync(exercise);
+            await dbContext.SaveChangesAsync();
+            return exercise;
         }
         public async Task<Exercise> UpdateExerciseAsync(Exercise exercise, int exerciseId)
         {
@@ -32,7 +34,18 @@ namespace Goal_Flex_ServerSide.Repositories
         }
         public async Task<Exercise> DeleteExerciseAsync(int exerciseId)
         {
-            throw new NotImplementedException();
+            var exercise = await dbContext.Exercises.SingleOrDefaultAsync(exercise => exercise.Id == exerciseId);
+
+            if (exercise != null)
+            {
+                dbContext.Exercises.Remove(exercise);
+                await dbContext.SaveChangesAsync();
+            }
+            return exercise;
+        }
+        public async Task<bool> UserExistsAsync(int userId)
+        {
+            return await dbContext.Users.AnyAsync(user => user.Id == userId);
         }
     }
 }

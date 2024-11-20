@@ -24,7 +24,9 @@ namespace Goal_Flex_ServerSide.Repositories
         }
         public async Task<Meal> CreateMealAsync(Meal meal)
         {
-            throw new NotImplementedException();
+            await dbContext.Meals.AddAsync(meal);
+            await dbContext.SaveChangesAsync();
+            return meal;
         }
         public async Task<Meal> UpdateMealAsync(Meal meal, int mealId)
         {
@@ -32,7 +34,18 @@ namespace Goal_Flex_ServerSide.Repositories
         }
         public async Task<Meal> DeleteMealAsync(int mealId)
         {
-            throw new NotImplementedException();
+            var meal = await dbContext.Meals.SingleOrDefaultAsync(meal => meal.Id == mealId);
+
+            if (meal != null)
+            {
+                dbContext.Meals.Remove(meal);
+                await dbContext.SaveChangesAsync();
+            }
+            return meal;
+        }
+        public async Task<bool> UserExistsAsync(int userId)
+        {
+            return await dbContext.Users.AnyAsync(user => user.Id == userId);
         }
     }
 }

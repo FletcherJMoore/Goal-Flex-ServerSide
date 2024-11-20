@@ -25,7 +25,9 @@ namespace Goal_Flex_ServerSide.Repositories
         }
         public async Task<Workout> CreateWorkoutAsync(Workout workout)
         {
-            throw new NotImplementedException();
+            await dbContext.Workouts.AddAsync(workout);
+            await dbContext.SaveChangesAsync();
+            return workout;
         }
         public async Task<Workout> UpdateWorkoutAsync(Workout workout, int workoutId)
         {
@@ -33,7 +35,22 @@ namespace Goal_Flex_ServerSide.Repositories
         }
         public async Task<Workout> DeleteWorkoutAsync(int workoutId)
         {
-            throw new NotImplementedException();
+            var workout = await dbContext.Workouts.SingleOrDefaultAsync(workout => workout.Id == workoutId);
+
+            if (workout != null)
+            {
+                dbContext.Workouts.Remove(workout);
+                await dbContext.SaveChangesAsync();
+            }
+            return workout;
+        }
+        public async Task<bool> CategoryExistsAsync(int categoryId)
+        {
+            return await dbContext.Categories.AnyAsync(category => category.Id == categoryId);
+        }
+        public async Task<bool> UserExistsAsync(int userId)
+        {
+            return await dbContext.Users.AnyAsync(user => user.Id == userId);
         }
     }
 }

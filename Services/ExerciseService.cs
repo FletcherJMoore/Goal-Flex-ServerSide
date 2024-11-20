@@ -2,6 +2,7 @@
 using Goal_Flex_ServerSide.Interfaces;
 using Goal_Flex_ServerSide.Models;
 using Goal_Flex_ServerSide.Repositories;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Goal_Flex_ServerSide.Services
 {
@@ -26,7 +27,19 @@ namespace Goal_Flex_ServerSide.Services
         }
         public async Task<Exercise> CreateExerciseAsync(Exercise exercise)
         {
-            return await _exerciseRepository.CreateExerciseAsync(exercise);
+            if (!await _exerciseRepository.UserExistsAsync(exercise.UserId))
+            {
+                throw new ArgumentException($"There is no user with the following id: {exercise.UserId}");
+            }
+
+            Exercise newExercise = new()
+            {
+                Title = exercise.Title,
+                Image = exercise.Image,
+                Instructions = exercise.Instructions,
+                UserId = exercise.UserId,
+            };
+            return await _exerciseRepository.CreateExerciseAsync(newExercise);
         }
         public async Task<Exercise> UpdateExerciseAsync(Exercise exercise, int exerciseId)
         {

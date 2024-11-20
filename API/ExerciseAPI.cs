@@ -48,6 +48,32 @@ namespace Goal_Flex_ServerSide.API
                     exercise.UserId
                 });
             });
+
+            // Create new exercise
+            group.MapPost("/", async (IExerciseService exerciseService, Exercise newExercise) =>
+            {
+                try
+                {
+                    var createdExercise = await exerciseService.CreateExerciseAsync(newExercise);
+                    return Results.Ok(createdExercise);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.NotFound(ex.Message);
+                }
+            });
+
+            //Delete exercise
+            group.MapDelete("/{exerciseId}", async (IExerciseService exerciseService, int exerciseId) =>
+            {
+                var exerciseToDelete = await exerciseService.DeleteExerciseAsync(exerciseId);
+                if (exerciseToDelete == null)
+                {
+                    return Results.NotFound($"There is no exercise with a matching id of: {exerciseId}");
+                }
+                return Results.Ok(exerciseToDelete);
+
+            });
         }
     }
 }

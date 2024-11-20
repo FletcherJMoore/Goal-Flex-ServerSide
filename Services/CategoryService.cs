@@ -1,5 +1,6 @@
 ﻿using Goal_Flex_ServerSide.Interfaces;
 using Goal_Flex_ServerSide.Models;
+using Goal_Flex_ServerSide.Repositories;
 
 namespace Goal_Flex_ServerSide.Services
 {
@@ -16,6 +17,21 @@ namespace Goal_Flex_ServerSide.Services
         {
             return await _categoryRepository.GetCategoriesAsync();
         }
-
+        public async Task<Category> CreateCategoryAsync(Category category)
+        {
+            Category newCategory = new()
+            {
+                Name = category.Name,
+            };
+            return await _categoryRepository.CreateCategoryAsync(newCategory);
+        }
+        public async Task<Category> UpdateCategoryAsync(Category category, int categoryId)
+        {
+            return await _categoryRepository.UpdateCategoryAsync(category, categoryId);
+        }
+        public async Task<Category> DeleteCategoryAsync(int categoryId)
+        {
+            return await _categoryRepository.DeleteCategoryAsync(categoryId);
+        }
     }
 }
