@@ -42,6 +42,21 @@ namespace Goal_Flex_ServerSide.API
                 }
             });
 
+            // PUT category
+            group.MapPut("/{categoryId}", async (ICategoryService categoryService, int categoryId, Category category) =>
+            {
+                try
+                {
+                    var updatedCategory = await categoryService.UpdateCategoryAsync(category, categoryId);
+
+                    return Results.Ok(updatedCategory);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.NotFound(ex.Message);
+                }
+            });
+
             //Delete category
             group.MapDelete("/{categoryId}", async (ICategoryService categoryService, int categoryId) =>
             {

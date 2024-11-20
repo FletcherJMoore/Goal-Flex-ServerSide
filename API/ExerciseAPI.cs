@@ -63,6 +63,21 @@ namespace Goal_Flex_ServerSide.API
                 }
             });
 
+            // PUT exercise
+            group.MapPut("/{exerciseId}", async (IExerciseService exerciseService, int exerciseId, Exercise exercise) =>
+            {
+                try
+                {
+                    var updatedExercise = await exerciseService.UpdateExerciseAsync(exercise, exerciseId);
+
+                    return Results.Ok(updatedExercise);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.NotFound(ex.Message);
+                }
+            });
+
             //Delete exercise
             group.MapDelete("/{exerciseId}", async (IExerciseService exerciseService, int exerciseId) =>
             {

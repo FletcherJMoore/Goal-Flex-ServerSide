@@ -15,7 +15,7 @@ namespace Goal_Flex_ServerSide.API
         {
             var group = routes.MapGroup("workouts").WithTags(nameof(Workout));
 
-            // Get all Workouts. (Returns WorkoutDTO)
+            // GET all Workouts. (Returns WorkoutDTO)
             group.MapGet("/", async (IWorkoutService workoutService) =>
             {
                 try
@@ -33,7 +33,7 @@ namespace Goal_Flex_ServerSide.API
                 }
             });
 
-            // Get single Workout and it's excercises
+            // GET single Workout and it's excercises
             group.MapGet("/{workoutId}", async (IWorkoutService workoutService, int workoutId) =>
             {
                 var workout = await workoutService.GetWorkoutByIdAsync(workoutId);
@@ -56,7 +56,7 @@ namespace Goal_Flex_ServerSide.API
                 });
             });
 
-            // Create new workout
+            // CREATE workout
             group.MapPost("/", async (IWorkoutService workoutService, Workout newWorkout) =>
             {
                 try
@@ -70,7 +70,22 @@ namespace Goal_Flex_ServerSide.API
                 }
             });
 
-            //Delete workout
+            // PUT workout
+            group.MapPut("/{storyId}", async (IWorkoutService workoutService, int workoutId, Workout workout) =>
+            {
+                try
+                {
+                    var updatedWorkout = await workoutService.UpdateWorkoutAsync(workout, workoutId);
+
+                    return Results.Ok(updatedWorkout);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.NotFound(ex.Message);
+                }
+            });
+
+            //DELETE workout
             group.MapDelete("/{workoutId}", async (IWorkoutService workoutService, int workoutId) =>
             {
                 var workoutToDelete = await workoutService.DeleteWorkoutAsync(workoutId);
