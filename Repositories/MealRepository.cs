@@ -30,7 +30,22 @@ namespace Goal_Flex_ServerSide.Repositories
         }
         public async Task<Meal> UpdateMealAsync(Meal meal, int mealId)
         {
-            throw new NotImplementedException();
+            var existingMeal = await dbContext.Meals.FindAsync(mealId);
+
+            if (existingMeal == null)
+            {
+                return null;
+            }
+
+            existingMeal.Title = meal.Title;
+            existingMeal.Image = meal.Image;
+            existingMeal.Calories = meal.Calories;
+            existingMeal.Recipe = meal.Recipe;
+            existingMeal.UserId = meal.UserId;
+
+            await dbContext.SaveChangesAsync();
+
+            return existingMeal;
         }
         public async Task<Meal> DeleteMealAsync(int mealId)
         {

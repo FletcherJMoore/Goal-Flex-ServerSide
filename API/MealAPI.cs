@@ -65,6 +65,21 @@ namespace Goal_Flex_ServerSide.API
                 }
             });
 
+            // PUT meal
+            group.MapPut("/{mealId}", async (IMealService mealService, int mealId, Meal meal) =>
+            {
+                try
+                {
+                    var updatedMeal = await mealService.UpdateMealAsync(meal, mealId);
+
+                    return Results.Ok(updatedMeal);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.NotFound(ex.Message);
+                }
+            });
+
             //Delete meal
             group.MapDelete("/{mealId}", async (IMealService mealService, int mealId) =>
             {

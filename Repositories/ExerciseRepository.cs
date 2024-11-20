@@ -30,7 +30,21 @@ namespace Goal_Flex_ServerSide.Repositories
         }
         public async Task<Exercise> UpdateExerciseAsync(Exercise exercise, int exerciseId)
         {
-            throw new NotImplementedException();
+            var existingExercise = await dbContext.Exercises.FindAsync(exerciseId);
+
+            if (existingExercise == null)
+            {
+                return null;
+            }
+
+            existingExercise.Title = exercise.Title;
+            existingExercise.Image = exercise.Image;
+            existingExercise.Instructions = exercise.Instructions;
+            existingExercise.UserId = exercise.UserId;
+
+            await dbContext.SaveChangesAsync();
+
+            return existingExercise;
         }
         public async Task<Exercise> DeleteExerciseAsync(int exerciseId)
         {

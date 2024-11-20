@@ -50,6 +50,16 @@ namespace Goal_Flex_ServerSide.Services
         }
         public async Task<Workout> UpdateWorkoutAsync(Workout workout, int workoutId)
         {
+            if (!await _workoutRepository.UserExistsAsync(workout.UserId))
+            {
+                throw new ArgumentException($"There is no user with the following id: {workout.UserId}");
+            }
+
+            if (!await _workoutRepository.CategoryExistsAsync(workout.CategoryId))
+            {
+                throw new ArgumentException($"There are no categories with the following id: {workout.CategoryId}");
+            }
+
             return await _workoutRepository.UpdateWorkoutAsync(workout, workoutId);
         }
         public async Task<Workout> DeleteWorkoutAsync(int workoutId)

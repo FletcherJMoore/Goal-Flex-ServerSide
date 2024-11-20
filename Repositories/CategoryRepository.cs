@@ -25,8 +25,18 @@ namespace Goal_Flex_ServerSide.Repositories
         }
             public async Task<Category> UpdateCategoryAsync(Category category, int categoryId)
             {
-                throw new NotImplementedException();
+                var existingCategory = await dbContext.Categories.FindAsync(categoryId);
+
+            if (existingCategory == null)
+            {
+                return null;
             }
+            existingCategory.Name = category.Name;
+
+            await dbContext.SaveChangesAsync();
+
+            return existingCategory;
+        }
             public async Task<Category> DeleteCategoryAsync(int categoryId)
             {
             var category = await dbContext.Categories.SingleOrDefaultAsync(category => category.Id == categoryId);
