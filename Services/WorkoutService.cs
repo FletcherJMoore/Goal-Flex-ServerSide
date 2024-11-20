@@ -2,6 +2,7 @@
 using Goal_Flex_ServerSide.Models;
 using Goal_Flex_ServerSide.Repositories;
 using Goal_Flex_ServerSide.DTOs;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Goal_Flex_ServerSide.Services
 {
@@ -26,7 +27,26 @@ namespace Goal_Flex_ServerSide.Services
         }
         public async Task<Workout> CreateWorkoutAsync(Workout workout)
         {
-            return await _workoutRepository.CreateWorkoutAsync(workout);
+            if (!await _workoutRepository.UserExistsAsync(workout.UserId))
+            {
+                throw new ArgumentException($"There is no user with the following id: {workout.UserId}");
+            }
+
+            if (!await _workoutRepository.CategoryExistsAsync(workout.CategoryId))
+            {
+                throw new ArgumentException($"There are no categories with the following id: {workout.CategoryId}");
+            }
+
+            Workout newWorkout = new()
+            {
+                Title = workout.Title,
+                Image = workout.Image,
+                Time = workout.Time,
+                Difficulty = workout.Difficulty,
+                UserId = workout.UserId,
+                CategoryId = workout.CategoryId,
+            };
+            return await _workoutRepository.CreateWorkoutAsync(newWorkout);
         }
         public async Task<Workout> UpdateWorkoutAsync(Workout workout, int workoutId)
         {

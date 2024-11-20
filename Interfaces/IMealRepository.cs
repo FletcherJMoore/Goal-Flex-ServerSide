@@ -9,5 +9,7 @@ namespace Goal_Flex_ServerSide.Interfaces
         Task<Meal> CreateMealAsync(Meal meal);
         Task<Meal> UpdateMealAsync(Meal meal, int mealId);
         Task<Meal> DeleteMealAsync(int mealId);
+        Task<bool> UserExistsAsync(int userId);
+
     }
 }

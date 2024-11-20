@@ -9,5 +9,7 @@ namespace Goal_Flex_ServerSide.Interfaces
         Task<Workout> CreateWorkoutAsync(Workout workout);
         Task<Workout> UpdateWorkoutAsync(Workout story, int workoutId);
         Task<Workout> DeleteWorkoutAsync(int workoutId);
+        Task<bool> UserExistsAsync(int userId);
+        Task<bool> CategoryExistsAsync(int categoryId);
     }
 }

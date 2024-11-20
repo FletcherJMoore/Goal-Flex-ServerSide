@@ -27,6 +27,32 @@ namespace Goal_Flex_ServerSide.API
                     return Results.NotFound(ex.Message);
                 }
             });
+
+            // Create new category
+            group.MapPost("/", async (ICategoryService categoryService, Category newCategory) =>
+            {
+                try
+                {
+                    var createdCategory = await categoryService.CreateCategoryAsync(newCategory);
+                    return Results.Ok(createdCategory);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.NotFound(ex.Message);
+                }
+            });
+
+            //Delete category
+            group.MapDelete("/{categoryId}", async (ICategoryService categoryService, int categoryId) =>
+            {
+                var categoryToDelete = await categoryService.DeleteCategoryAsync(categoryId);
+                if (categoryToDelete == null)
+                {
+                    return Results.NotFound($"There is no category with a matching id of: {categoryId}");
+                }
+                return Results.Ok(categoryToDelete);
+
+            });
         }
     }
 }

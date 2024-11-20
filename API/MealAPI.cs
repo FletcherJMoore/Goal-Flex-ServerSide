@@ -50,6 +50,32 @@ namespace Goal_Flex_ServerSide.API
                    User = new UserDTO(meal.User),
                 });
             });
+
+            // Create new meal
+            group.MapPost("/", async (IMealService mealService, Meal newMeal) =>
+            {
+                try
+                {
+                    var createdMeal = await mealService.CreateMealAsync(newMeal);
+                    return Results.Ok(createdMeal);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.NotFound(ex.Message);
+                }
+            });
+
+            //Delete meal
+            group.MapDelete("/{mealId}", async (IMealService mealService, int mealId) =>
+            {
+                var mealToDelete = await mealService.DeleteMealAsync(mealId);
+                if (mealToDelete == null)
+                {
+                    return Results.NotFound($"There is no meal with a matching id of: {mealId}");
+                }
+                return Results.Ok(mealToDelete);
+
+            });
         }
     }
 }

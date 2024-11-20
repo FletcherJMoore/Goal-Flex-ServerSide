@@ -55,6 +55,32 @@ namespace Goal_Flex_ServerSide.API
                     User = new UserDTO(workout.User),
                 });
             });
+
+            // Create new workout
+            group.MapPost("/", async (IWorkoutService workoutService, Workout newWorkout) =>
+            {
+                try
+                {
+                    var createdWorkout = await workoutService.CreateWorkoutAsync(newWorkout);
+                    return Results.Ok(createdWorkout);
+                }
+                catch (ArgumentException ex)
+                {
+                    return Results.NotFound(ex.Message);
+                }
+            });
+
+            //Delete workout
+            group.MapDelete("/{workoutId}", async (IWorkoutService workoutService, int workoutId) =>
+            {
+                var workoutToDelete = await workoutService.DeleteWorkoutAsync(workoutId);
+                if (workoutToDelete == null)
+                {
+                    return Results.NotFound($"There is no workout with a matching id of: {workoutId}");
+                }
+                return Results.Ok(workoutToDelete);
+
+            });
         }
     }
 }

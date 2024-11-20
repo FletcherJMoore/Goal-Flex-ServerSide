@@ -26,7 +26,20 @@ namespace Goal_Flex_ServerSide.Services
         }
         public async Task<Meal> CreateMealAsync(Meal meal)
         {
-            return await _mealRepository.CreateMealAsync(meal);
+            if (!await _mealRepository.UserExistsAsync(meal.UserId))
+            {
+                throw new ArgumentException($"There is no user with the following id: {meal.UserId}");
+            }
+
+            Meal newMeal = new()
+            {
+                Title = meal.Title,
+                Image = meal.Image,
+                Recipe = meal.Recipe,
+                Calories = meal.Calories,
+                UserId = meal.UserId,
+            };
+            return await _mealRepository.CreateMealAsync(newMeal);
         }
         public async Task<Meal> UpdateMealAsync(Meal meal, int mealId)
         {
