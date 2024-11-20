@@ -51,7 +51,7 @@ namespace Goal_Flex_ServerSide.API
                 });
             });
 
-            // Create new exercise
+            // Create new meal
             group.MapPost("/", async (IMealService mealService, Meal newMeal) =>
             {
                 try
