@@ -47,7 +47,7 @@ Initialize user secrets and set your PostgreSQL connection string:
 
 ```bash
 dotnet user-secrets init
-dotnet user-secrets set "BE-FanFusionDbConnectionString" "Host=localhost;Port=5432;Username=postgres;Password=<your-password>;Database=BE-FanFusion"
+dotnet user-secrets set "GoalFlexDbConnectionString" "Host=localhost;Port=5432;Username=postgres;Password=<your-password>;Database=GoalFlex"
 ```
 Replace `<your_postgresql_password>` with your actual database password.
 
