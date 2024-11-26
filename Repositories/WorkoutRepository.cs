@@ -35,7 +35,7 @@ namespace Goal_Flex_ServerSide.Repositories
 
             if (existingWorkout == null)
             {
-                return null;
+                throw new ArgumentException($"Workout with ID {workoutId} does not exist.");
             }
 
             existingWorkout.Title = workout.Title;

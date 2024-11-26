@@ -34,7 +34,7 @@ namespace Goal_Flex_ServerSide.Repositories
 
             if (existingMeal == null)
             {
-                return null;
+                throw new ArgumentException($"Meal with ID {mealId} does not exist.");
             }
 
             existingMeal.Title = meal.Title;

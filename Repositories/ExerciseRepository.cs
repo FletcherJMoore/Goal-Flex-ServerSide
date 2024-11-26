@@ -20,7 +20,8 @@ namespace Goal_Flex_ServerSide.Repositories
         public async Task<Exercise> GetExerciseByIdAsync(int exerciseId)
         {
             return await dbContext.Exercises
-             .SingleOrDefaultAsync(s => s.Id == exerciseId);
+             .Include(e => e.User)
+             .SingleOrDefaultAsync(e => e.Id == exerciseId);
         }
         public async Task<Exercise> CreateExerciseAsync(Exercise exercise)
         {
@@ -34,7 +35,7 @@ namespace Goal_Flex_ServerSide.Repositories
 
             if (existingExercise == null)
             {
-                return null;
+                throw new ArgumentException($"Exercise with ID {exerciseId} does not exist.");
             }
 
             existingExercise.Title = exercise.Title;
