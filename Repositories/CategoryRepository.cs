@@ -29,7 +29,7 @@ namespace Goal_Flex_ServerSide.Repositories
 
             if (existingCategory == null)
             {
-                return null;
+                throw new ArgumentException($"Category with ID {categoryId} does not exist.");
             }
             existingCategory.Name = category.Name;
 

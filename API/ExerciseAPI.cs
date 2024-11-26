@@ -45,7 +45,8 @@ namespace Goal_Flex_ServerSide.API
                     exercise.Title,
                     exercise.Image,
                     exercise.Instructions,
-                    exercise.UserId
+                    exercise.UserId,
+                    User = new UserDTO(exercise.User),
                 });
             });
 

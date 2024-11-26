@@ -71,7 +71,7 @@ namespace Goal_Flex_ServerSide.API
             });
 
             // PUT workout
-            group.MapPut("/{storyId}", async (IWorkoutService workoutService, int workoutId, Workout workout) =>
+            group.MapPut("/{workoutId}", async (IWorkoutService workoutService, int workoutId, Workout workout) =>
             {
                 try
                 {
