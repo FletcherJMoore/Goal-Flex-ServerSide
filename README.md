@@ -108,10 +108,10 @@ Use **Postman** or Swagger UI to interact with the API and test CRUD operations 
 | PUT    | `/workouts/{workoutId}` | Update an existing workout |
 | DELETE | `/workouts/{workoutId}` | Delete a workout           |
 
-
+## Project Board
+[Capstone Project Board](https://github.com/users/FletcherJMoore/projects/8)
 
 ## Postman Documentation
-
 The API documentation is available in Postman, providing a detailed guide on how to interact with the Goal Flex Server Side.
 
 - [Goal Flex Documentation](https://www.postman.com/gold-crescent-717386/goalflex/collection/4l7bkru/goal-flex-serverside)
