@@ -67,8 +67,6 @@ Use **Postman** or Swagger UI to interact with the API and test CRUD operations 
 
 ## API Endpoints
 
-## API Endpoints
-
 ### Category
 | Method | Endpoint               | Description                |
 |--------|------------------------|----------------------------|
@@ -117,9 +115,7 @@ Use **Postman** or Swagger UI to interact with the API and test CRUD operations 
 The API documentation is available in Postman, providing a detailed guide on how to interact with the Goal Flex Server Side.
 
 - [Goal Flex Documentation](https://www.postman.com/gold-crescent-717386/goalflex/collection/4l7bkru/goal-flex-serverside)
-
-## Video API Walkthrough
-###Coming Soon
+- [Postman Documentation Walkthrough](https://www.loom.com/share/c26fa5dfd67d436da37dca5f164977f0?sid=70853725-860e-4547-b1e4-4b91240ec15c)
 
 ## Contributors
 
