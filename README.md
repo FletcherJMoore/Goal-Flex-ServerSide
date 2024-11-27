@@ -11,7 +11,7 @@ Goal Flex is a fitness application designed to help users achieve their fitness 
 - [Postman Documentation](#postman-documentation)
 - [Video API Walkthrough](#video-api-walkthrough)
 - [Project Board](#project-board)
-- [ERD](#erd)
+- [ERD](#project-erd)
 - [Postman Documentation](#postman-documentation)
 - [Contributors](#contributors)
 
