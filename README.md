@@ -111,6 +111,9 @@ Use **Postman** or Swagger UI to interact with the API and test CRUD operations 
 ## Project Board
 [Capstone Project Board](https://github.com/users/FletcherJMoore/projects/8)
 
+## Project ERD
+[Project ERD](https://dbdiagram.io/d/Capstone-ERD-672f8ca5e9daa85acae1ea3e)
+
 ## Postman Documentation
 The API documentation is available in Postman, providing a detailed guide on how to interact with the Goal Flex Server Side.
 
