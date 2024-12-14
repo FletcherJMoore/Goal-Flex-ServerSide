@@ -39,6 +39,10 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+
+builder.Services.AddScoped<IWorkoutExerciseService, WorkoutExerciseService>();
+builder.Services.AddScoped<IWorkoutExerciseRepository, WorkoutExerciseRepository>();
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -72,5 +76,6 @@ app.MapMealAPI();
 app.MapWorkoutAPI();
 app.MapExerciseAPI();
 app.MapUserAPI();
+app.MapWorkoutExerciseAPI();
 
 app.Run();
